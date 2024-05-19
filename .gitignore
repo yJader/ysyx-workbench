@@ -17,5 +17,9 @@
 !/preLeanring/**/src/*.cpp
 !/preLeanring/**/src/*.h
 !/preLearning/**/*.md
+
 !/preLearning/learn c the hard way/c-skeleton/src/*.c
 !/preLearning/learn c the hard way/src/*.c
+
+!preLearning/verilator/*/*.v
+!preLearning/verilator/*/*.cpp/nvboard
