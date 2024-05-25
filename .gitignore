@@ -11,11 +11,14 @@
 !.gitignore
 !init.sh
 
+# mill out
+out/*
 
 # 不生效 why?
 !/preLeanring/**/src/*.c 
 !/preLeanring/**/src/*.cpp
 !/preLeanring/**/src/*.h
+.metals/
 !/preLearning/**/*.md
 
 !/preLearning/learn c the hard way/c-skeleton/src/*.c

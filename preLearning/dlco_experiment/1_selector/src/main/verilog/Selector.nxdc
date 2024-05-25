@@ -1,0 +1,11 @@
+top=selector
+
+io_sel (SW1, SW0)
+io_in_x0 (SW3, SW2)
+io_in_x1 (SW5, SW4)
+io_in_x2 (SW7, SW6)
+io_in_x3 (SW9, SW8)
+
+io_out (LD1, LD0)
+
+clock SW15
