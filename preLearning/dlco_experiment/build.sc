@@ -32,3 +32,7 @@ trait MyModule extends SbtModule { m =>
 object selector extends MyModule { m =>
   override def millSourcePath = os.pwd / "1_selector"
 }
+
+object coder extends MyModule { m =>
+  override def millSourcePath = os.pwd / "2_decoder_encoder"
+}

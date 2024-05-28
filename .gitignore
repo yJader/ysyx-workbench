@@ -18,7 +18,8 @@ out/*
 !/preLeanring/**/src/*.c 
 !/preLeanring/**/src/*.cpp
 !/preLeanring/**/src/*.h
-.metals/
+# .metals 插件生成的文件(日志居然是.md)
+/**/.metals/**
 !/preLearning/**/*.md
 
 !/preLearning/learn c the hard way/c-skeleton/src/*.c

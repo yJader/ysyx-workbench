@@ -21,8 +21,10 @@ $(SRC_AUTO_BIND): $(NXDC_FILES)
 	python3 $(NVBOARD_HOME)/scripts/auto_pin_bind.py $^ $@
 
 # project source files
-VSRCS = $(shell find $(abspath ./src/main/verilog) -name "*.v" -or -name "*.sv")
-CSRCS = $(shell find $(abspath ./src/main/cpp) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
+CPP_DIR = src/main/cpp
+VERILOG_DIR = src/main/verilog
+VSRCS = $(abspath $(VERILOG_DIR)/*.sv)
+CSRCS = $(abspath $(CPP_DIR))/*.cpp
 CSRCS += $(SRC_AUTO_BIND)
 # 必须用绝对路径 否则verilator在指定输出目录后会找不到文件
 # SOURCE_FILES += top.v sim_main.cpp
@@ -34,16 +36,16 @@ $(shell export DISPLAY=:0.0)
 
 test_echo:
 	@echo PWD: $(PWD)
-	@echo $(VSRCS)
+	@echo VERILOG_FILES:\d $(VSRCS)
 	@echo $(NXDC_FILES) $(SRC_AUTO_BIND)
 	@echo $(addprefix -LDFLAGS , $(LDFLAGS)) $(addprefix -CFLAGS , $(NVBOARD_CFLAGS))
 
-cc: 
-	$(VERILATOR) --cc --build -j 0 -Wall $(VSRCS) --Mdir $(OBJ_DIR)
+cc: $(VSRCS)
+	$(VERILATOR) --cc --build -j 0 $^ --Mdir $(OBJ_DIR)
 
-sim: $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE) $(SRC_AUTO_BIND)
+sim: $(VSRCS) $(CSRCS)
 	@echo "Building $(BIN)"
-	$(VERILATOR) --cc --exe --trace --build -j 0 -Wall -Wno-UNUSEDSIGNAL $(VSRCS) $(CSRCS) verilated_vcd_c.cpp $(NVBOARD_ARCHIVE) \
+	$(VERILATOR) --cc --exe --trace --build -j 0 -Wall -Wno-UNUSEDSIGNAL $^  verilated_vcd_c.cpp $(NVBOARD_ARCHIVE) \
 		$(addprefix -LDFLAGS , $(LDFLAGS)) $(addprefix -CFLAGS , $(NVBOARD_CFLAGS)) \
 		--Mdir $(OBJ_DIR) -o $(abspath $(BIN))
 
