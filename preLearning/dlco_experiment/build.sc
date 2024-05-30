@@ -36,3 +36,7 @@ object selector extends MyModule { m =>
 object coder extends MyModule { m =>
   override def millSourcePath = os.pwd / "2_decoder_encoder"
 }
+
+object alu extends MyModule { m =>
+  override def millSourcePath = os.pwd / "3_alu"
+}
