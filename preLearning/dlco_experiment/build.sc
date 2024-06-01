@@ -38,5 +38,6 @@ object coder extends MyModule { m =>
 }
 
 object alu extends MyModule { m =>
+  override def moduleDeps: Seq[JavaModule] = Seq(coder)
   override def millSourcePath = os.pwd / "3_alu"
 }

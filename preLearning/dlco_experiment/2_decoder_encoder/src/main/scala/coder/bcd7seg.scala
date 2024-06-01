@@ -17,6 +17,23 @@ object BCD7SegmentCodes {
   val CODE_NUM_8 = "b00000001".U(8.W)
   val CODE_NUM_9 = "b00001001".U(8.W)
 
+  val codeSeq = Seq(
+    CODE_NUM_0,
+    CODE_NUM_1,
+    CODE_NUM_2,
+    CODE_NUM_3,
+    CODE_NUM_4,
+    CODE_NUM_5,
+    CODE_NUM_6,
+    CODE_NUM_7,
+    CODE_NUM_8,
+    CODE_NUM_9
+  )
+  var codeMap: Map[Int, Int] = Map[Int, Int]()
+  for (i <- 0 until 10) {
+    codeMap += (codeSeq(i).litValue.intValue -> i)
+  }
+
   // 将integer转换为BCD7SegmentCodes
   def getCode(num: Int): UInt = {
     num match {
@@ -32,6 +49,10 @@ object BCD7SegmentCodes {
       case 9 => CODE_NUM_9
       case _ => CODE_ERROR
     }
+  }
+
+  def getNum(code: UInt): Int = {
+    codeMap.getOrElse(code.litValue.intValue, -1)
   }
 }
 
@@ -60,4 +81,5 @@ class bcd7seg extends Module {
       )
     )
   }
+
 }
